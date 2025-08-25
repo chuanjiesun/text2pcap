@@ -629,7 +629,7 @@ http:
           </html>
 ```
 
-### 7. Remote Command Execution Example (rce_fail_http_1.yaml)
+### 7. Remote Command Execution Example (config_http3.yaml)
 
 Log4j vulnerability simulation configuration:
 
@@ -673,7 +673,7 @@ http:
           </html>
 ```
 
-### 8. Expression Injection Example (rce_test1.yaml)
+### 8. Expression Injection Example (config_http2.yaml)
 
 Expression injection attack simulation configuration:
 
