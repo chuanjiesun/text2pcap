@@ -1,0 +1,40 @@
+
+info:
+  name: TCP多个请求在同一流中
+  description: mutli request in one flow
+tcp:
+  data:
+    - description: 连接TCP服务器
+      ip_pair:
+        src_ip: 12.168.7.210
+        src_port: RANDOM
+        dst_ip: 19.247.27.41
+        dst_port: 3399
+      data_pair:
+        - description: tcp flow - 1
+          request:
+            format: plain
+            req_data: |
+              tcp request flow 1
+          response:
+            format: plain
+            resp_data: |
+              tcp response flow 1 
+        - description: tcp flow - 2
+          request:
+            format: hex
+            req_data: |
+              746370207265717565737420666C6F772032
+          response:
+            format: hex
+            resp_data: |
+              74637020726573706F6E736520666C6F772032
+        - description: tcp flow - 3
+          request:
+            format: base64
+            req_data: |
+              dGNwIHJlcXVlc3QgZmxvdyAz
+          response:
+            format: base64
+            resp_data: |
+              dGNwIHJlc3BvbnNlIGZsb3cgMw==

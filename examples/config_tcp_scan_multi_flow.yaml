@@ -1,0 +1,86 @@
+
+info:
+  name: TCP端口连接-多条流
+  description: multi tcp flow
+tcp:
+  data:
+    - description: 172.168.4.66对10.200.3.100的3306端口连接
+      ip_pair:
+        src_ip: 172.168.4.66
+        src_port: RANDOM
+        dst_ip: 10.200.3.100
+        dst_port: 3306
+      data_pair:
+        - description: 172.168.4.66对10.200.3.100的3306端口连接
+          request:
+            format: base64
+            req_data: |
+              YXJlIHlvdSBvayA/
+          response:
+            format: base64
+            resp_data: |
+              aSdtIGZpbmUu
+    - description: 172.168.4.66对10.200.3.101的3306端口连接
+      ip_pair:
+        src_ip: 172.168.4.66
+        src_port: RANDOM
+        dst_ip: 10.200.3.101
+        dst_port: 3306
+      data_pair:
+        - description: 172.168.4.66对10.200.3.101的3306端口连接
+          request:
+            format: base64
+            req_data: |
+              d2hvIGFyZSB5b3U=
+          response:
+            format: base64
+            resp_data: |
+              bXkgbmFtZSBpcyBpa3Vu
+    - description: 172.168.4.66对10.200.3.102的3306端口连接
+      ip_pair:
+        src_ip: 172.168.4.66
+        src_port: RANDOM
+        dst_ip: 10.200.3.102
+        dst_port: 3306
+      data_pair:
+        - description: 172.168.4.66对10.200.3.102的3306端口连接
+          request:
+            format: plain
+            req_data: |
+              is_ok
+          response:
+            format: plain
+            resp_data: |
+              OK
+    - description: 172.168.4.66对10.200.3.103的3306端口连接
+      ip_pair:
+        src_ip: 172.168.4.66
+        src_port: RANDOM
+        dst_ip: 10.200.3.103
+        dst_port: 3306
+      data_pair:
+        - description: 172.168.4.66对10.200.3.103的3306端口连接
+          request:
+            format: plain
+            req_data: |
+              is_ok
+          response:
+            format: plain
+            resp_data: |
+              OK
+    - description: 172.168.4.66对10.200.3.104的3306端口连接
+      ip_pair:
+        src_ip: 172.168.4.66
+        src_port: RANDOM
+        dst_ip: 10.200.3.104
+        dst_port: 3306
+      data_pair:
+        - description: 172.168.4.66对10.200.3.104的3306端口连接
+          request:
+            format: hex
+            req_data: |
+              6E6968616F6D61 
+          response:
+            format: hex
+            resp_data: |
+              776F68656E68616F
