@@ -149,7 +149,7 @@ dns:
         dst_ip: "DNS服务器IP"
         dst_port: 53      # DNS默认端口
       request:
-        req_type: A       # 支持 A、AAAA、CNAME、MX、TXT、NS、PTR
+        req_type: A       # 支持 A、AAAA、CNAME、MX、TXT
         domain: "查询域名"
       response:
         resp_status_code: 0  # 0表示成功，其他值表示错误
