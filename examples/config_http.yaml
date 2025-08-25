@@ -1,0 +1,31 @@
+info:
+  name: http测试用例
+  description: 测试
+http:
+  data:
+    - description: "通过HTTP POST请求用例"
+      ip_pair:
+        src_ip: 42.38.89.2
+        src_port: RANDOM
+        dst_ip: 172.168.1.200
+        dst_port: 80  
+      request:
+        format: plain
+        req_data: |
+          POST /page/index.php HTTP/1.1
+          Host: example.com
+          Content-Length: 11
+          Accept-Charset: iso-8859-1,utf-8;q=0.9,*;q=0.1
+          Accept-Language: en
+          Content-Type: application/x-www-form-urlencoded
+          User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)
+
+          id=7788
+      response:
+        format: plain
+        resp_data: |
+          HTTP/1.1 200 OK
+          Content-Type: application/json
+          Content-Length: 126
+
+          {"msg":"success","retString":"0"}
