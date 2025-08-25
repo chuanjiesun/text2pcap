@@ -440,14 +440,14 @@ info:
   description: multi tcp flow
 tcp:
   data:
-    - description: 172.168.4.66对10.200.3.100的3306端口连接
+    - description: 172.168.4.66对10.200.3.100的5432端口连接
       ip_pair:
         src_ip: 172.168.4.66
         src_port: RANDOM
         dst_ip: 10.200.3.100
-        dst_port: 3306
+        dst_port: 5432
       data_pair:
-        - description: 172.168.4.66对10.200.3.100的3306端口连接
+        - description: 172.168.4.66对10.200.3.100的5432端口连接
           request:
             format: base64
             req_data: |
@@ -456,14 +456,14 @@ tcp:
             format: base64
             resp_data: |
               aSdtIGZpbmUu
-    - description: 172.168.4.66对10.200.3.101的3306端口连接
+    - description: 172.168.4.66对10.200.3.101的5432端口连接
       ip_pair:
         src_ip: 172.168.4.66
         src_port: RANDOM
         dst_ip: 10.200.3.101
-        dst_port: 3306
+        dst_port: 5432
       data_pair:
-        - description: 172.168.4.66对10.200.3.101的3306端口连接
+        - description: 172.168.4.66对10.200.3.101的5432端口连接
           request:
             format: base64
             req_data: |
@@ -472,14 +472,14 @@ tcp:
             format: base64
             resp_data: |
               bXkgbmFtZSBpcyBpa3Vu
-    - description: 172.168.4.66对10.200.3.102的3306端口连接
+    - description: 172.168.4.66对10.200.3.102的5432端口连接
       ip_pair:
         src_ip: 172.168.4.66
         src_port: RANDOM
         dst_ip: 10.200.3.102
-        dst_port: 3306
+        dst_port: 5432
       data_pair:
-        - description: 172.168.4.66对10.200.3.102的3306端口连接
+        - description: 172.168.4.66对10.200.3.102的5432端口连接
           request:
             format: plain
             req_data: |
@@ -488,14 +488,14 @@ tcp:
             format: plain
             resp_data: |
               OK
-    - description: 172.168.4.66对10.200.3.103的3306端口连接
+    - description: 172.168.4.66对10.200.3.103的5432端口连接
       ip_pair:
         src_ip: 172.168.4.66
         src_port: RANDOM
         dst_ip: 10.200.3.103
-        dst_port: 3306
+        dst_port: 5432
       data_pair:
-        - description: 172.168.4.66对10.200.3.103的3306端口连接
+        - description: 172.168.4.66对10.200.3.103的5432端口连接
           request:
             format: plain
             req_data: |
@@ -504,14 +504,14 @@ tcp:
             format: plain
             resp_data: |
               OK
-    - description: 172.168.4.66对10.200.3.104的3306端口连接
+    - description: 172.168.4.66对10.200.3.104的5432端口连接
       ip_pair:
         src_ip: 172.168.4.66
         src_port: RANDOM
         dst_ip: 10.200.3.104
-        dst_port: 3306
+        dst_port: 5432
       data_pair:
-        - description: 172.168.4.66对10.200.3.104的3306端口连接
+        - description: 172.168.4.66对10.200.3.104的5432端口连接
           request:
             format: hex
             req_data: |
@@ -629,7 +629,7 @@ http:
           </html>
 ```
 
-### 7. 远程命令执行示例 (rce_fail_http_1.yaml)
+### 7. 远程命令执行示例 (config_http3.yaml)
 
 Log4j漏洞模拟配置：
 
@@ -673,7 +673,7 @@ http:
           </html>
 ```
 
-### 8. 表达式注入示例 (rce_test1.yaml)
+### 8. 表达式注入示例 (config_http2.yaml)
 
 表达式注入攻击模拟配置：
 
