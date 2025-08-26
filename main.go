@@ -725,7 +725,33 @@ func generateDefaultFilename(config Config) (string, error) {
 
 	return fmt.Sprintf("%s_%s.pcap", name, timestamp), nil
 }
-
+// isHTTPRequest 判断HTTP数据是请求还是响应
+// HTTP请求的第一行格式：METHOD PATH HTTP/VERSION
+// HTTP响应的第一行格式：HTTP/VERSION STATUS_CODE STATUS_TEXT
+func isHTTPRequest(httpData string) bool {
+	headerLines := strings.Split(httpData, "\r\n")
+	if len(headerLines) == 0 {
+		return false
+	}
+	
+	firstLine := strings.TrimSpace(headerLines[0])
+	if firstLine == "" {
+		return false
+	}
+	
+	// HTTP响应以"HTTP/"开头
+	if strings.HasPrefix(firstLine, "HTTP/") {
+		return false
+	}
+	
+	// HTTP请求的第一行应该包含HTTP方法
+	parts := strings.Fields(firstLine)
+	if len(parts) >= 3 && strings.HasPrefix(parts[2], "HTTP/") {
+		return true
+	}
+	
+	return false
+}
 // updateHostHeader 更新HTTP请求头中的Host字段
 // isIPAddress 检查字符串是否为有效的IP地址
 func isIPAddress(host string) bool {
@@ -805,7 +831,10 @@ func decodePayload(format, data string, ipPair IPPair, protocolType string) ([]b
 		if strings.Contains(decodedStr, "HTTP/") {
 			decodedStr = strings.ReplaceAll(decodedStr, "\r\n", "\n")
 			decodedStr = strings.ReplaceAll(decodedStr, "\n", "\r\n")
-			decodedStr = updateHostHeader(decodedStr, ipPair)
+			// 只对HTTP请求更新Host头，不对HTTP响应处理
+			if isHTTPRequest(decodedStr) {
+				decodedStr = updateHostHeader(decodedStr, ipPair)
+			}
 			decodedStr = fixHTTPContentLength(decodedStr)
 			decodedStr = removeHTTPHeaders(decodedStr, []string{"Date", "Transfer-Encoding"})
 		}
@@ -826,12 +855,14 @@ func decodePayload(format, data string, ipPair IPPair, protocolType string) ([]b
 			// 检测是否为HTTP数据，如果是则转换换行符并修正Content-Length
 			decodedStr = strings.ReplaceAll(decodedStr, "\r\n", "\n") // 先统一为LF
 			decodedStr = strings.ReplaceAll(decodedStr, "\n", "\r\n") // 再转换为CRLF
-			// 更新Host头
-			decodedStr = updateHostHeader(decodedStr, ipPair)
+			/// 只对HTTP请求更新Host头，不对HTTP响应处理
+			if isHTTPRequest(decodedStr) {
+				decodedStr = updateHostHeader(decodedStr, ipPair)
+			}
 			// 自动修正Content-Length
 			decodedStr = fixHTTPContentLength(decodedStr)
 			// 移除Date头和Transfer-Encoding头
-			decodedStr = removeHTTPHeaders(decodedStr, []string{"date", "Transfer-Encoding"})
+			decodedStr = removeHTTPHeaders(decodedStr, []string{"Date", "Transfer-Encoding"})
 		}
 		return []byte(decodedStr), nil
 	case "plain":
@@ -844,12 +875,14 @@ func decodePayload(format, data string, ipPair IPPair, protocolType string) ([]b
 			// 检测是否为HTTP数据，如果是则转换换行符并修正Content-Length
 			data = strings.ReplaceAll(data, "\r\n", "\n") // 先统一为LF
 			data = strings.ReplaceAll(data, "\n", "\r\n") // 再转换为CRLF
-			// 更新Host头
-			data = updateHostHeader(data, ipPair)
+			// 只对HTTP请求更新Host头，不对HTTP响应处理
+			if isHTTPRequest(data) {
+				data = updateHostHeader(data, ipPair)
+			}
 			// 自动修正Content-Length
 			data = fixHTTPContentLength(data)
 			// 移除Date头和Transfer-Encoding头
-			data = removeHTTPHeaders(data, []string{"date", "Transfer-Encoding"})
+			data = removeHTTPHeaders(data, []string{"Date", "Transfer-Encoding"})
 		}
 		return []byte(data), nil
 	default:
